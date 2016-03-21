@@ -29,6 +29,12 @@ namespace SIG_UWP
                     Label = "Home Page",
                     DestPage = typeof(HomeView)
                 },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.Map,
+                    Label = "Maps",
+                    DestPage = typeof(HomeView)
+                },
             });
 
         public static AppShell Current = null;
