@@ -77,7 +77,7 @@
 
         <!--Command bar-->
         <CommandBar x:Name="topbar" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" Grid.Row="0">
-            <AppBarButton Icon="Add" Label="Ajouter" Width="40"/>
+            <AppBarButton Icon="Add" Label="Ajouter" Width="40" Command="{Binding AddPositionCommand}"/>
             <AppBarButton Icon="Edit" Label="Editer" Width="40" HorizontalAlignment="Left"/>
             <AppBarButton Icon="Delete" Label="Supprimer" Width="40" />
             <AppBarSeparator/>
@@ -107,28 +107,28 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="{Binding TbkInfo, Mode=TwoWay}" TextWrapping="Wrap" Grid.ColumnSpan="4" Margin="0,10" />
+            <TextBlock Text="{Binding Path=InfoBlock, Mode=TwoWay}" TextWrapping="Wrap" Grid.ColumnSpan="4" Margin="0,10" />
             <TextBlock FontFamily="Segoe MDL2 Assets" TextWrapping="Wrap" 
                    Text="&#xE909;" VerticalAlignment="Center" 
                    SelectionHighlightColor="{x:Null}" Grid.Row="1" />
-            <TextBox Text="{Binding TbxLabel, Mode=TwoWay}" TextWrapping="Wrap" Margin="10,0,0,0"
+            <TextBox Text="{Binding Path=Label, Mode=TwoWay}" TextWrapping="Wrap" Margin="10,0,0,0"
                      PlaceholderText="Label Name" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" />
 
             <TextBlock Text="LAT" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,0" />
             <TextBox TextWrapping="Wrap" Margin="10,10,0,0" Grid.Row="2" Grid.Column="1" 
-                     Text="{Binding TbxLatDegre, Mode=TwoWay}" PlaceholderText="Degré" />
+                     Text="{Binding Path=LatitudeDegre, Mode=TwoWay}" PlaceholderText="Degré" InputScope="Number"/>
             <TextBox TextWrapping="Wrap" Margin="10,10,0,0" Grid.Row="2" Grid.Column="2"
-                     Text="{Binding TbxLatMinute, Mode=TwoWay}" PlaceholderText="Minute" />
+                     Text="{Binding Path=LatitudeMinute, Mode=TwoWay}" PlaceholderText="Minute" InputScope="Number" />
             <TextBox TextWrapping="Wrap" Margin="10,10,0,0" Grid.Row="2" Grid.Column="3"
-                     Text="{Binding TbxLatSeconde, Mode=TwoWay}" PlaceholderText="Seconde" />
+                     Text="{Binding Path=LatitudeSeconde, Mode=TwoWay}" PlaceholderText="Seconde" InputScope="Number" />
 
             <TextBlock Text="LNG" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,0" />
             <TextBox TextWrapping="Wrap" Margin="10,10,0,0" Grid.Row="3" Grid.Column="1" 
-                     Text="{Binding TbxLngDegre, Mode=TwoWay}" PlaceholderText="Degré" />
+                     Text="{Binding Path=LongtitudeDegre, Mode=TwoWay}" PlaceholderText="Degré" InputScope="Number" />
             <TextBox TextWrapping="Wrap" Margin="10,10,0,0" Grid.Row="3" Grid.Column="2"
-                     Text="{Binding TbxLngMinute, Mode=TwoWay}" PlaceholderText="Minute" />
+                     Text="{Binding Path=LongtitudeMinute, Mode=TwoWay}" PlaceholderText="Minute" InputScope="Number" />
             <TextBox TextWrapping="Wrap" Margin="10,10,0,0" Grid.Row="3" Grid.Column="3"
-                     Text="{Binding TbxLngSeconde, Mode=TwoWay}" PlaceholderText="Seconde" />
+                     Text="{Binding Path=LongtitudeSeconde, Mode=TwoWay}" PlaceholderText="Seconde" InputScope="Number" />
 
             <ComboBox Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Stretch"
                       Margin="0,10" Grid.ColumnSpan="2" Header="Latitude" SelectedIndex="0">

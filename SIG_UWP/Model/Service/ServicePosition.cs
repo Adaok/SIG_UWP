@@ -1,8 +1,8 @@
 ﻿/*=====================================================================*
 * Class: <ServicePosition>
-* Version/date: <2016.03.26>
+* Version/date: <2016.03.26> v2
 *
-* Description: <Service for Position objects, who make process in database.>
+* Description: <Service for Position objects, who make process in database and other process.>
 * Specificities: <No.>
 *
 * Authors: Marco LOIODICE
@@ -21,6 +21,8 @@ namespace SIG_UWP.Model.Service
 {
     class ServicePosition
     {
+        #region Database Operation
+
         public static ObservableCollection<Position> GetListPosition()
         {
             ObservableCollection<Position> positionListDatabase = new ObservableCollection<Position>();
@@ -66,5 +68,31 @@ namespace SIG_UWP.Model.Service
             }
             return true;
         }
+
+        #endregion
+
+        #region others methods
+
+        //need update later for deletion.
+        public static Position CreatePosition(string label, int latitudeDegre, int latitudeMinute, int latitudeSeconde, int longitudeDegre, int longitudeMinute, int longitudeSeconde, string enumLat, string enumLong)
+        {
+            Position newPosition = new Position();
+            newPosition.ID_POSITION = GetListPosition().Count;
+            newPosition.LABEL = label;
+            newPosition.LAT_SEX = latitudeDegre + "°" + latitudeMinute + "'" + latitudeSeconde + " '' ";
+            newPosition.LONG_SEX = longitudeDegre + "°" + longitudeMinute + "'" + longitudeSeconde + " '' ";
+            newPosition.LAT_DEC = ConvertSexToDec(latitudeDegre, latitudeMinute, latitudeSeconde);
+            newPosition.LONG_DEC = ConvertSexToDec(longitudeDegre, longitudeMinute, longitudeSeconde);
+            //missing enums
+            return newPosition;
+        }
+
+        private static float ConvertSexToDec(int degre, int minute, int seconde)
+        {
+            float convert = degre + (minute / (float)60) + (seconde / (float)3600);
+            return convert;
+        }
+
+        #endregion
     }
 }
