@@ -51,7 +51,7 @@
                            Margin="6,0,0,3"/>
                 <TextBlock Grid.Row="1"
                            Grid.Column="2"
-                           Text="{x:Bind LATiTUDE}" 
+                           Text="{x:Bind LATITUDE}" 
                            x:Phase="2"
                            Style="{ThemeResource BodyTextBlockStyle}"
                            Margin="6,0,0,3"/>
