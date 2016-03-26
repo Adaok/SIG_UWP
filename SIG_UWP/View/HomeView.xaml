@@ -4,26 +4,82 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SIG_UWP.View"
     xmlns:nav="using:SIG_UWP.Navigation"
+    xmlns:data="using:SIG_UWP.Model.Class"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <DataTemplate x:Key="MyPositionListViewItemTemplate" x:DataType="data:Position">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.ColumnSpan="3"
+                           Text="{x:Bind LABEL}"
+                           x:Phase="1"
+                           Style="{ThemeResource BaseTextBlockStyle}"
+                           Margin="6,3,0,0" />
+                <TextBlock Grid.Row="1"
+                           Text="{x:Bind LAT_SEX}" 
+                           x:Phase="2"
+                           Style="{ThemeResource BodyTextBlockStyle}"
+                           Margin="6,0,0,3"/>
+                <TextBlock Grid.Row="2"
+                           Text="{x:Bind LONG_SEX}" 
+                           x:Phase="2"
+                           Style="{ThemeResource BodyTextBlockStyle}"
+                           Margin="6,0,0,3"/>
+                <TextBlock Grid.Row="1"
+                           Grid.Column="1"
+                           Text="{x:Bind LAT_DEC}" 
+                           x:Phase="2"
+                           Style="{ThemeResource BodyTextBlockStyle}"
+                           Margin="6,0,0,3"/>
+                <TextBlock Grid.Row="2"
+                           Grid.Column="1"
+                           Text="{x:Bind LONG_DEC}"
+                           x:Phase="2"
+                           Style="{ThemeResource BodyTextBlockStyle}"
+                           Margin="6,0,0,3"/>
+                <TextBlock Grid.Row="1"
+                           Grid.Column="2"
+                           Text="{x:Bind LATiTUDE}" 
+                           x:Phase="2"
+                           Style="{ThemeResource BodyTextBlockStyle}"
+                           Margin="6,0,0,3"/>
+                <TextBlock Grid.Row="2"
+                           Grid.Column="2"
+                           Text="{x:Bind LONGITUDE}"
+                           x:Phase="2"
+                           Style="{ThemeResource BodyTextBlockStyle}"
+                           Margin="6,0,0,3"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
 
         <!--Command bar-->
-        <CommandBar x:Name="topbar" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" Grid.Row="0" Grid.ColumnSpan="2">
-            <AppBarButton Icon="Add" Label="Ajouter"/>
-            <AppBarButton Icon="Edit" Label="Editer"/>
-            <AppBarButton Icon="Delete" Label="Supprimer" />
+        <CommandBar x:Name="topbar" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" Grid.Row="0">
+            <AppBarButton Icon="Add" Label="Ajouter" Width="40"/>
+            <AppBarButton Icon="Edit" Label="Editer" Width="40" HorizontalAlignment="Left"/>
+            <AppBarButton Icon="Delete" Label="Supprimer" Width="40" />
             <AppBarSeparator/>
             <!--<AppBarToggleButton Icon="Zoom" Label="Chercher"/>-->
             <CommandBar.Content>
@@ -34,9 +90,9 @@
                 </nav:PageHeader>
             </CommandBar.Content>
         </CommandBar>
-        
+
         <!--Form Input position-->
-        <Grid Grid.Column="1" Grid.Row="1">
+        <Grid Grid.Row="1" BorderThickness="0,0,0,1" BorderBrush="Black" Margin="10,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -55,36 +111,48 @@
             <TextBlock FontFamily="Segoe MDL2 Assets" TextWrapping="Wrap" 
                    Text="&#xE909;" VerticalAlignment="Center" 
                    SelectionHighlightColor="{x:Null}" Grid.Row="1" />
-            <TextBox Text="{Binding TbxLabel, Mode=TwoWay}" TextWrapping="Wrap" Margin="10,0"
+            <TextBox Text="{Binding TbxLabel, Mode=TwoWay}" TextWrapping="Wrap" Margin="10,0,0,0"
                      PlaceholderText="Label Name" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" />
 
             <TextBlock Text="LAT" Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,0" />
             <TextBox TextWrapping="Wrap" Margin="10,10,0,0" Grid.Row="2" Grid.Column="1" 
-                     Text="{Binding TbxLatDegre, Mode=TwoWay}" />
+                     Text="{Binding TbxLatDegre, Mode=TwoWay}" PlaceholderText="Degré" />
             <TextBox TextWrapping="Wrap" Margin="10,10,0,0" Grid.Row="2" Grid.Column="2"
-                     Text="{Binding TbxLatMinute, Mode=TwoWay}" />
-            <TextBox TextWrapping="Wrap" Margin="10,10,10,0" Grid.Row="2" Grid.Column="3"
-                     Text="{Binding TbxLatSeconde, Mode=TwoWay}" />
+                     Text="{Binding TbxLatMinute, Mode=TwoWay}" PlaceholderText="Minute" />
+            <TextBox TextWrapping="Wrap" Margin="10,10,0,0" Grid.Row="2" Grid.Column="3"
+                     Text="{Binding TbxLatSeconde, Mode=TwoWay}" PlaceholderText="Seconde" />
 
             <TextBlock Text="LNG" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,10,0,0" />
             <TextBox TextWrapping="Wrap" Margin="10,10,0,0" Grid.Row="3" Grid.Column="1" 
-                     Text="{Binding TbxLngDegre, Mode=TwoWay}" />
+                     Text="{Binding TbxLngDegre, Mode=TwoWay}" PlaceholderText="Degré" />
             <TextBox TextWrapping="Wrap" Margin="10,10,0,0" Grid.Row="3" Grid.Column="2"
-                     Text="{Binding TbxLngMinute, Mode=TwoWay}" />
-            <TextBox TextWrapping="Wrap" Margin="10,10,10,0" Grid.Row="3" Grid.Column="3"
-                     Text="{Binding TbxLngSeconde, Mode=TwoWay}" />
+                     Text="{Binding TbxLngMinute, Mode=TwoWay}" PlaceholderText="Minute" />
+            <TextBox TextWrapping="Wrap" Margin="10,10,0,0" Grid.Row="3" Grid.Column="3"
+                     Text="{Binding TbxLngSeconde, Mode=TwoWay}" PlaceholderText="Seconde" />
 
+            <ComboBox Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                      Margin="0,10" Grid.ColumnSpan="2" Header="Latitude" SelectedIndex="0">
+                <ComboBoxItem>Nord</ComboBoxItem>
+                <ComboBoxItem>Sud</ComboBoxItem>
+            </ComboBox>
+
+            <ComboBox Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch"
+                      Margin="10,10,0,10" Grid.ColumnSpan="2" Header="Longitude" SelectedIndex="0">
+                <ComboBoxItem>Est</ComboBoxItem>
+                <ComboBoxItem>Ouest</ComboBoxItem>
+            </ComboBox>
+            
         </Grid>
         
-        <!--<StackPanel Grid.Column="1" Grid.Row="1">
-            <TextBlock TextWrapping="Wrap" Text="{Binding TbkInfo, Mode=TwoWay}" />
-            <StackPanel Orientation="Horizontal">
-                <TextBlock FontFamily="Segoe MDL2 Assets" TextWrapping="Wrap" 
-                   Text="&#xE909;" VerticalAlignment="Center" SelectionHighlightColor="{x:Null}" />
-                <TextBox TextWrapping="NoWrap" Margin="10,0,0,0" PlaceholderText="Label name" />
-            </StackPanel>
-        </StackPanel>-->
-        
+        <!-- List Item -->
+        <ListView ItemsSource="{Binding PositionList}"
+                  ItemTemplate="{StaticResource MyPositionListViewItemTemplate}"
+                  SelectionMode="Single"
+                  IsItemClickEnabled="False"
+                  SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
+                  ShowsScrollingPlaceholders="True"
+                  Grid.Row="2" />
+
 
 
     </Grid>

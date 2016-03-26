@@ -1,6 +1,6 @@
 ﻿/*=====================================================================*
 * Class: <Position>
-* Version/date: <2016.03.21> v2
+* Version/date: <2016.03.21> v3
 *
 * Description: <Position file is the model object of files stocks in a MSQLite table.>
 * Specificities: <No.>
@@ -13,6 +13,18 @@ using SQLite.Net.Attributes;
 
 namespace SIG_UWP.Model.Class
 {
+    public enum LAT
+    {
+        N,
+        S
+    }
+
+    public enum LONG
+    {
+        E,
+        O
+    }
+
     class Position
     {
         [PrimaryKey]
@@ -27,5 +39,9 @@ namespace SIG_UWP.Model.Class
         public float LAT_DEC { get; set; }
 
         public float LONG_DEC { get; set; }
+
+        public LAT LATITUDE { get; set; }
+
+        public LONG LONGITUDE { get; set; }
     }
 }
