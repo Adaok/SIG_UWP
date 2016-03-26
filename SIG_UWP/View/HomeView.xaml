@@ -131,13 +131,13 @@
                      Text="{Binding Path=LongtitudeSeconde, Mode=TwoWay}" PlaceholderText="Seconde" InputScope="Number" />
 
             <ComboBox Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Stretch"
-                      Margin="0,10" Grid.ColumnSpan="2" Header="Latitude" SelectedIndex="0">
+                      Margin="0,10" Grid.ColumnSpan="2" Header="Latitude" SelectedIndex="{Binding Path=EnumLatitude, Mode=TwoWay}">
                 <ComboBoxItem>Nord</ComboBoxItem>
                 <ComboBoxItem>Sud</ComboBoxItem>
             </ComboBox>
 
             <ComboBox Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Stretch"
-                      Margin="10,10,0,10" Grid.ColumnSpan="2" Header="Longitude" SelectedIndex="0">
+                      Margin="10,10,0,10" Grid.ColumnSpan="2" Header="Longitude" SelectedIndex="{Binding Path=EnumLongitude, Mode=TwoWay}">
                 <ComboBoxItem>Est</ComboBoxItem>
                 <ComboBoxItem>Ouest</ComboBoxItem>
             </ComboBox>

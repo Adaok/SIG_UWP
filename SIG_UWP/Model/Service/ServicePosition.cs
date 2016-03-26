@@ -74,7 +74,7 @@ namespace SIG_UWP.Model.Service
         #region others methods
 
         //need update later for deletion.
-        public static Position CreatePosition(string label, int latitudeDegre, int latitudeMinute, int latitudeSeconde, int longitudeDegre, int longitudeMinute, int longitudeSeconde, string enumLat, string enumLong)
+        public static Position CreatePosition(string label, int latitudeDegre, int latitudeMinute, int latitudeSeconde, int longitudeDegre, int longitudeMinute, int longitudeSeconde, int enumLat, int enumLong)
         {
             Position newPosition = new Position();
             newPosition.ID_POSITION = GetListPosition().Count;
@@ -83,7 +83,9 @@ namespace SIG_UWP.Model.Service
             newPosition.LONG_SEX = longitudeDegre + "°" + longitudeMinute + "'" + longitudeSeconde + " '' ";
             newPosition.LAT_DEC = ConvertSexToDec(latitudeDegre, latitudeMinute, latitudeSeconde);
             newPosition.LONG_DEC = ConvertSexToDec(longitudeDegre, longitudeMinute, longitudeSeconde);
-            //missing enums
+            newPosition.LATITUDE = (LAT)enumLat;
+            newPosition.LONGITUDE = (LONG)enumLong;
+
             return newPosition;
         }
 

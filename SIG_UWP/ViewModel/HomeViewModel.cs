@@ -122,6 +122,26 @@ namespace SIG_UWP.ViewModel
 
         #endregion
 
+        #region enum Value Latitude and Longitude
+
+        private int m_EnumLatitude;
+
+        public int EnumLatitude
+        {
+            get { return m_EnumLatitude; }
+            set { NotifyPropertyChanged(ref m_EnumLatitude, value); }
+        }
+
+        private int m_EnumLongitude;
+
+        public int EnumLongitude
+        {
+            get { return m_EnumLongitude; }
+            set { NotifyPropertyChanged(ref m_EnumLongitude, value); }
+        }
+
+        #endregion
+
         #endregion
 
         #region Actions in CommandBar
@@ -133,9 +153,10 @@ namespace SIG_UWP.ViewModel
 
         private void AddPosition()
         {
-            Position newPosition = ServicePosition.CreatePosition(m_Label, m_LatitudeDegre, m_LatitudeMinute, m_LatitudeSeconde, m_LongtitudeDegre, m_LongtitudeMinute, m_LongtitudeSeconde, null, null);
+            Position newPosition = ServicePosition.CreatePosition(m_Label, m_LatitudeDegre, m_LatitudeMinute, m_LatitudeSeconde, m_LongtitudeDegre, m_LongtitudeMinute, m_LongtitudeSeconde, m_EnumLatitude, m_EnumLongitude);
             ServicePosition.CreateOrUpdatePositionInDB(newPosition);
             PositionList = ServicePosition.GetListPosition();
+            CleanInput();
         }
 
         public ICommand EditPositionCommand
@@ -156,6 +177,21 @@ namespace SIG_UWP.ViewModel
         private void DeletePosition()
         {
             throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region Others methods
+
+        private void CleanInput()
+        {
+            Label = string.Empty;
+            LatitudeDegre = 0;
+            LatitudeMinute = 0;
+            LatitudeSeconde = 0;
+            LongtitudeDegre = 0;
+            LongtitudeMinute = 0;
+            LongtitudeSeconde = 0;
         }
 
         #endregion
