@@ -98,8 +98,10 @@
     <Compile Include="AppShell.xaml.cs">
       <DependentUpon>AppShell.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Base\DelegateCommand.cs" />
     <Compile Include="Base\ViewModelBase.cs" />
     <Compile Include="Model\Class\Position.cs" />
+    <Compile Include="Model\Service\ServicePosition.cs" />
     <Compile Include="Navigation\NavMenuItem.cs" />
     <Compile Include="Navigation\NavMenuListView.cs" />
     <Compile Include="Navigation\PageHeader.xaml.cs">
@@ -150,9 +152,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\Service\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <SDKReference Include="SQLite.UAP.2015, Version=3.10.2">
       <Name>SQLite for Universal App Platform</Name>

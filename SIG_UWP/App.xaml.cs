@@ -1,4 +1,5 @@
-﻿using SIG_UWP.View;
+﻿using SIG_UWP.Model.Class;
+using SIG_UWP.View;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,6 +24,8 @@ namespace SIG_UWP
     /// </summary>
     sealed partial class App : Application
     {
+        static string path;
+        public static SQLite.Net.SQLiteConnection dbConnect;
         /// <summary>
         /// Initialise l'objet d'application de singleton.  Il s'agit de la première ligne du code créé
         /// à être exécutée. Elle correspond donc à l'équivalent logique de main() ou WinMain().
@@ -31,6 +34,10 @@ namespace SIG_UWP
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            path = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "databaseSIGApp.sqlite");
+            dbConnect = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), path);
+            dbConnect.CreateTable<Position>();
         }
 
         /// <summary>
