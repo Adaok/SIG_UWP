@@ -1,6 +1,6 @@
 ﻿/*=====================================================================*
 * Class: <HomeViewModel>
-* Version/date: <2016.03.20> v2
+* Version/date: <2016.03.20> v3
 *
 * Description: <HomeViewModel is file who pilotes the page.>
 * Specificities: <No.>
@@ -28,6 +28,19 @@ namespace SIG_UWP.ViewModel
         public HomeViewModel()
         {
             PositionList = ServicePosition.GetListPosition();
+            m_IsEnabled = false;
+        }
+
+        #endregion
+
+        #region Position id
+
+        private int m_IdPosition;
+
+        public int IdPosition
+        {
+            get { return m_IdPosition; }
+            set { NotifyPropertyChanged(ref m_IdPosition, value); }
         }
 
         #endregion
@@ -40,6 +53,18 @@ namespace SIG_UWP.ViewModel
         {
             get { return m_PositionList; }
             set { NotifyPropertyChanged(ref m_PositionList, value); }
+        }
+
+        #endregion
+
+        #region Button Enabled
+
+        private bool m_IsEnabled;
+
+        public bool IsEnabled
+        {
+            get { return m_IsEnabled; }
+            set { NotifyPropertyChanged(ref m_IsEnabled, value); }
         }
 
         #endregion
@@ -153,10 +178,14 @@ namespace SIG_UWP.ViewModel
 
         private void AddPosition()
         {
-            Position newPosition = ServicePosition.CreatePosition(m_Label, m_LatitudeDegre, m_LatitudeMinute, m_LatitudeSeconde, m_LongtitudeDegre, m_LongtitudeMinute, m_LongtitudeSeconde, m_EnumLatitude, m_EnumLongitude);
+            Position newPosition = ServicePosition.CreatePosition(m_IdPosition ,m_Label, m_LatitudeDegre, m_LatitudeMinute, m_LatitudeSeconde, m_LongtitudeDegre, m_LongtitudeMinute, m_LongtitudeSeconde, m_EnumLatitude, m_EnumLongitude);
             ServicePosition.CreateOrUpdatePositionInDB(newPosition);
-            PositionList = ServicePosition.GetListPosition();
             CleanInput();
+            SelectedIndex = -1;
+            IdPosition = 0;
+            IsEnabled = false;
+            InfoBlock = string.Empty;
+            PositionList = ServicePosition.GetListPosition();
         }
 
         public ICommand EditPositionCommand
@@ -166,7 +195,9 @@ namespace SIG_UWP.ViewModel
 
         private void EditPosition()
         {
-            throw new NotImplementedException();
+            int latitude = (int)SelectedPosition.LATITUDE;
+            int longitude = (int)SelectedPosition.LONGITUDE;
+            LoadInput(SelectedPosition.LABEL, SelectedPosition.LAT_DEC, SelectedPosition.LONG_DEC, latitude, longitude);
         }
 
         public ICommand DeletePositionCommand
@@ -181,6 +212,35 @@ namespace SIG_UWP.ViewModel
 
         #endregion
 
+        #region selectItem
+
+        int m_SelectedIndex = -1; //Set -1 for haven't item select
+
+        public int SelectedIndex
+        {
+            get { return m_SelectedIndex; }
+            set {
+                if (NotifyPropertyChanged(ref m_SelectedIndex, value))
+                {
+
+                    NotifyPropertyChanged(nameof(SelectedPosition));
+                    IsEnabled = true;
+                    if(SelectedPosition != null)
+                    {
+                        IdPosition = SelectedPosition.ID_POSITION;
+                    }
+                }
+            }
+        }
+
+        public Position SelectedPosition
+        {
+            get { return (m_SelectedIndex >= 0) ? m_PositionList[m_SelectedIndex] : null; }
+        }
+
+
+        #endregion
+
         #region Others methods
 
         private void CleanInput()
@@ -192,6 +252,22 @@ namespace SIG_UWP.ViewModel
             LongtitudeDegre = 0;
             LongtitudeMinute = 0;
             LongtitudeSeconde = 0;
+        }
+
+        private void LoadInput(string label, float latitude, float longitude, int enumLatitude, int enumLongitude)
+        {
+            Label = label;
+            List<int> sexLatitudeList = ServicePosition.ConvertDecToSex(latitude);
+            List<int> sexLongitudeList = ServicePosition.ConvertDecToSex(longitude);
+            LatitudeDegre = sexLatitudeList[0];
+            LatitudeMinute = sexLatitudeList[1];
+            LatitudeSeconde = sexLatitudeList[2];
+            LongtitudeDegre = sexLongitudeList[0];
+            LongtitudeMinute = sexLongitudeList[1];
+            LongtitudeSeconde = sexLongitudeList[2];
+            EnumLatitude = enumLatitude;
+            EnumLongitude = enumLongitude;
+            InfoBlock = "Vous êtes en mode édition. Cliquez sur + pour valider vos changements.";
         }
 
         #endregion

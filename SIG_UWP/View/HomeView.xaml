@@ -78,8 +78,8 @@
         <!--Command bar-->
         <CommandBar x:Name="topbar" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" Grid.Row="0">
             <AppBarButton Icon="Add" Label="Ajouter" Width="40" Command="{Binding AddPositionCommand}"/>
-            <AppBarButton Icon="Edit" Label="Editer" Width="40" HorizontalAlignment="Left"/>
-            <AppBarButton Icon="Delete" Label="Supprimer" Width="40" />
+            <AppBarButton Icon="Edit" Label="Editer" Width="40" Command="{Binding EditPositionCommand}" IsEnabled="{Binding IsEnabled}"/>
+            <AppBarButton Icon="Delete" Label="Supprimer" Width="40" Command="{Binding DeletePositionCommand}" IsEnabled="{Binding IsEnabled}" />
             <AppBarSeparator/>
             <!--<AppBarToggleButton Icon="Zoom" Label="Chercher"/>-->
             <CommandBar.Content>

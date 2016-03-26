@@ -74,10 +74,25 @@ namespace SIG_UWP.Model.Service
         #region others methods
 
         //need update later for deletion.
-        public static Position CreatePosition(string label, int latitudeDegre, int latitudeMinute, int latitudeSeconde, int longitudeDegre, int longitudeMinute, int longitudeSeconde, int enumLat, int enumLong)
+        public static Position CreatePosition(int id, string label, int latitudeDegre, int latitudeMinute, int latitudeSeconde, int longitudeDegre, int longitudeMinute, int longitudeSeconde, int enumLat, int enumLong)
         {
             Position newPosition = new Position();
-            newPosition.ID_POSITION = GetListPosition().Count;
+            if(id != 0)
+            {
+                newPosition.ID_POSITION = id;
+            }
+            else
+            {
+                if(GetListPosition().Count == 0)
+                {
+                    newPosition.ID_POSITION = 1;
+                }
+                else
+                {
+                    newPosition.ID_POSITION = GetListPosition().Last().ID_POSITION + 1;
+                }
+                
+            }
             newPosition.LABEL = label;
             newPosition.LAT_SEX = latitudeDegre + "°" + latitudeMinute + "'" + latitudeSeconde + " '' ";
             newPosition.LONG_SEX = longitudeDegre + "°" + longitudeMinute + "'" + longitudeSeconde + " '' ";
@@ -93,6 +108,18 @@ namespace SIG_UWP.Model.Service
         {
             float convert = degre + (minute / (float)60) + (seconde / (float)3600);
             return convert;
+        }
+
+        public static List<int> ConvertDecToSex(float decimalValue)
+        {
+            List<int> convertList = new List<int>();
+            int degre = (int)decimalValue;
+            int minute = (int)((decimalValue - degre) * 60);
+            int seconde = (int)(((decimalValue - degre) * 60) - minute) * 60;
+            convertList.Add(degre);
+            convertList.Add(minute);
+            convertList.Add(seconde);
+            return convertList;
         }
 
         #endregion
