@@ -69,6 +69,28 @@ namespace SIG_UWP.Model.Service
             return true;
         }
 
+        public static bool DeletePositionInDB(Position position)
+        {
+            var query = App.dbConnect.Table<Position>();
+            int valueReturn;
+            Exception e;
+            foreach(var item in query)
+            {
+                if(position.ID_POSITION == item.ID_POSITION)
+                {
+                    valueReturn = App.dbConnect.Delete(item);
+                    if(valueReturn != 1)
+                    {
+                        e = new Exception("Error delete in database.");
+                        return false;
+                    }
+                    return true;
+                }
+            }
+            e = new Exception("Bad argument for delete item");
+            return false;
+        }
+
         #endregion
 
         #region others methods
@@ -91,7 +113,6 @@ namespace SIG_UWP.Model.Service
                 {
                     newPosition.ID_POSITION = GetListPosition().Last().ID_POSITION + 1;
                 }
-                
             }
             newPosition.LABEL = label;
             newPosition.LAT_SEX = latitudeDegre + "°" + latitudeMinute + "'" + latitudeSeconde + " '' ";

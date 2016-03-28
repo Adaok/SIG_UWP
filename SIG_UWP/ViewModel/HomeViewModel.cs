@@ -207,7 +207,10 @@ namespace SIG_UWP.ViewModel
 
         private void DeletePosition()
         {
-            throw new NotImplementedException();
+            ServicePosition.DeletePositionInDB(SelectedPosition);
+            IsEnabled = false;
+            InfoBlock = string.Empty;
+            PositionList = ServicePosition.GetListPosition();
         }
 
         #endregion
