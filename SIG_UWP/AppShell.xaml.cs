@@ -35,6 +35,12 @@ namespace SIG_UWP
                     Label = "Maps",
                     DestPage = typeof(MapsView)
                 },
+                new NavMenuItem()
+                {
+                    Symbol = Symbol.Document,
+                    Label = "Canvas",
+                    DestPage = typeof(CanvasView)
+                }
             });
 
         public static AppShell Current = null;

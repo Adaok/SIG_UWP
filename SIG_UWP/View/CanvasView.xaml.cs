@@ -8,12 +8,12 @@ namespace SIG_UWP.View
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
-    public sealed partial class MapsView : Page
+    public sealed partial class CanvasView : Page
     {
-        public MapsView()
+        public CanvasView()
         {
             this.InitializeComponent();
-            DataContext = new MapsViewModel();
+            DataContext = new CanvasViewModel();
         }
     }
 }
