@@ -1,0 +1,42 @@
+﻿<Page
+    x:Class="SIG_UWP.View.MapsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SIG_UWP.View"
+    xmlns:nav="using:SIG_UWP.Navigation"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--Command bar-->
+        <CommandBar x:Name="topbar" VerticalAlignment="Top" HorizontalContentAlignment="Stretch" Grid.Row="0">
+            <AppBarButton Icon="Refresh" Label="Rafraichir" Width="40"/>
+            <AppBarSeparator/>
+            <!--<AppBarToggleButton Icon="Zoom" Label="Chercher"/>-->
+            <CommandBar.Content>
+                <nav:PageHeader>
+                    <nav:PageHeader.HeaderContent>
+                        <TextBlock Text="Maps View" Style="{ThemeResource PageTitleTextBlockStyle}" TextWrapping="NoWrap"/>
+                    </nav:PageHeader.HeaderContent>
+                </nav:PageHeader>
+            </CommandBar.Content>
+        </CommandBar>
+
+        <Maps:MapControl 
+            x:Name="Map" 
+            MapServiceToken="Z8CgHbdW_XMUezD8llU71A" 
+            ZoomInteractionMode="GestureAndControl" 
+            LandmarksVisible="True" 
+            IsRightTapEnabled="true"
+            Grid.Row="1"
+           />
+
+    </Grid>
+</Page>

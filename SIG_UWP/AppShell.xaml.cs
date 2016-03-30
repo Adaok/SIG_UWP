@@ -33,7 +33,7 @@ namespace SIG_UWP
                 {
                     Symbol = Symbol.Map,
                     Label = "Maps",
-                    DestPage = typeof(HomeView)
+                    DestPage = typeof(MapsView)
                 },
             });
 

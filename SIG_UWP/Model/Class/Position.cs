@@ -36,9 +36,9 @@ namespace SIG_UWP.Model.Class
 
         public string LONG_SEX { get; set; }
 
-        public float LAT_DEC { get; set; }
+        public double LAT_DEC { get; set; }
 
-        public float LONG_DEC { get; set; }
+        public double LONG_DEC { get; set; }
 
         public LAT LATITUDE { get; set; }
 

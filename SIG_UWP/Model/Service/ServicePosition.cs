@@ -125,18 +125,18 @@ namespace SIG_UWP.Model.Service
             return newPosition;
         }
 
-        private static float ConvertSexToDec(int degre, int minute, int seconde)
+        private static double ConvertSexToDec(int degre, int minute, int seconde)
         {
-            float convert = degre + (minute / (float)60) + (seconde / (float)3600);
+            double convert = degre + (minute / (double)60) + (seconde / (double)3600);
             return convert;
         }
 
-        public static List<int> ConvertDecToSex(float decimalValue)
+        public static List<int> ConvertDecToSex(double decimalValue)
         {
             List<int> convertList = new List<int>();
             int degre = (int)decimalValue;
             int minute = (int)((decimalValue - degre) * 60);
-            int seconde = (int)(((decimalValue - degre) * 60) - minute) * 60;
+            int seconde = (int)((((decimalValue - degre) * 60) - minute) * 60);
             convertList.Add(degre);
             convertList.Add(minute);
             convertList.Add(seconde);

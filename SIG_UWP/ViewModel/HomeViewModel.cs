@@ -257,7 +257,7 @@ namespace SIG_UWP.ViewModel
             LongtitudeSeconde = 0;
         }
 
-        private void LoadInput(string label, float latitude, float longitude, int enumLatitude, int enumLongitude)
+        private void LoadInput(string label, double latitude, double longitude, int enumLatitude, int enumLongitude)
         {
             Label = label;
             List<int> sexLatitudeList = ServicePosition.ConvertDecToSex(latitude);
